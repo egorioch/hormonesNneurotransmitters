@@ -31,7 +31,10 @@ public class UserController {
                             @RequestParam Map<String, String> form,
                             @RequestParam("userId") User user) {
 
-        System.out.println("user: " + user);
+        System.out.println("name(userSave.UserController): " + name);
+        System.out.println("user(userSave): " + user);
+        form.forEach((key, value) -> System.out.println(key + ": " + value));
+        //userService.saveUser();
 
         return "redirect:/userList";
     }
@@ -54,9 +57,18 @@ public class UserController {
     }
 
     @PostMapping("/profile")
-    public String changeProfile(User user) {
+    public String changeProfile(@AuthenticationPrincipal User user,
+                                @RequestParam("email") String email,
+                                @RequestParam("password") String password,
+                                Model model) {
 
-        System.out.println("user: " + user);
+        if (!userService.updateProfile(user, email, password)) {
+            model.addAttribute("messageType", "danger");
+            model.addAttribute("message", "Changes haven't been accepted...");
+        } else {
+            model.addAttribute("messageType", "success");
+            model.addAttribute("message", "Changes is accepted!");
+        }
 
         return "redirect:/user/profile";
     }

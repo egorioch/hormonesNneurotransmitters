@@ -40,8 +40,11 @@ public class RegistrationController {
     public String isActivate(@PathVariable String code, Model model) {
 
         if(userService.activateUser(code)) {
-            model.addAttribute("message", "Account is activated successfully");
+            model.addAttribute("messageType", "success");
+            model.addAttribute("message", "Account is activated successfully...");
+
         } else {
+            model.addAttribute("messageType", "danger");
             model.addAttribute("message", "Code is not found!");
         }
 
