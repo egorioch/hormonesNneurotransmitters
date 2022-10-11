@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Brain</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+</head>
+<body>
+    <form th:action="@{/user}" method="post" >
+        <div class="userGrid">
+        <div th:each="user : ${users}">
+            <table>
+                <thead>
+                <tr>
+                    <th>Name: </th>
+                    <th>Role: </th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td class="row m-2" th:text="${user.username}"></td>
+                    <td th:text="${user.roles}"></td>
+                    <td><a th:href="|/user/${user.id}|">edit</a></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        </div>
+    </form>
+</body>
+</html>
