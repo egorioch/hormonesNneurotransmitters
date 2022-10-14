@@ -20,6 +20,7 @@
         </div>
     </div>
 
+
     <!--div th:if="${user.username}">someValue</div-->
     <!--div th:unless="${user.username}">error by username</div-->
     <span th:if="${message != null}" th:text="${message}"></span>
@@ -39,7 +40,7 @@
 
     <input type="hidden" name="_csrf" value="${_csrf.token}" />
     <button class="btn btn-primary m-3" type="submit">Sign In</button>
-    <!--#if !isRegisterForm><a href="/registration">Add new user</a></#if--><a class="btn btn-primary m-3" href="/registration">Add new user</a>
+    <a class="btn btn-primary m-3" href="/registration">Add new user</a>
 </form>
 
 

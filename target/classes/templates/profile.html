@@ -13,6 +13,13 @@ xmlns:th="http://www.thymeleaf.org">
 <form th:action="@{/user/profile}" method="post">
 
     <h1 class="mb-3">Change your private information</h1>
+    <!--СДЕЛАТЬ ДИНАМИЧЕСКОЕ ИЗМЕНЕНИЕ В ЗАВИСИМОСТИ ОТ СТАТУСА СООБЩЕНИЯ -->
+    <span th:text="${message}"></span>
+    <div class="alert alert-" th:classappend="${messageType}" role="alert">
+        <span th:text="${message}"></span>
+    </div>
+
+    <span class="badge badge-info p-2 m-2" th:text="${user.username}"></span>
 
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Email: </label>
@@ -23,7 +30,7 @@ xmlns:th="http://www.thymeleaf.org">
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Password:</label>
         <div class="col-sm-6">
-            <input type="password" name="password" class="form-control" placeholder="Password" value="000"/>
+            <input type="password" name="password" class="form-control" placeholder="Password" th:value="${user.password}" />
         </div>
     </div>
 

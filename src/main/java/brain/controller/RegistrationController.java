@@ -6,10 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
@@ -23,16 +24,32 @@ public class RegistrationController {
         return "registration";
     }
 
+    @ModelAttribute
+    public User user() { return new User(); }
+
     @PostMapping("/registration")
-    public String addUser(User user, Map<String, Object> model) {
+    public String addUser(@Valid User user,
+                          BindingResult bindingResult,
+                          Model model) {
         System.out.println("user(in reg): " + user);
+
+        if (bindingResult.hasErrors()) {
+            System.out.println("Произошли ошибочки!");
+
+            return "registration";
+        } else {
+            System.out.println("bindingResult ерунда какая-то");
+        }
+
+        if(!user.getPassword().equals(user.getPasswordConfirm())) {
+            model.addAttribute("message", "password and password confirmation must be equal");
+        }
+
         if (!userService.addUser(user)) {
-            model.put("message", "User exists!");
+            model.addAttribute("message", "User exists!");
             return "registration";
         }
 
-        model.put("message", "The mail with verification code has send on your email! " +
-                "\nPlease, to confirm it.");
         return "redirect:/login";
     }
 

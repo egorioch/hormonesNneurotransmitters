@@ -34,10 +34,12 @@ public class UserController {
         System.out.println("name(userSave.UserController): " + name);
         System.out.println("user(userSave): " + user);
         form.forEach((key, value) -> System.out.println(key + ": " + value));
-        //userService.saveUser();
+
+        userService.saveUserEdit(user, name, form);
 
         return "redirect:/userList";
     }
+
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{userId}")
     public String userEditForm(@PathVariable("userId") User user, Model model) {
