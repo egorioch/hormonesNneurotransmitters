@@ -1,6 +1,8 @@
 package brain.controller;
 
 import brain.domain.Hormone;
+import brain.service.HormoneService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +17,9 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/hormone")
 public class HormoneController {
+    @Autowired
+    HormoneService hormoneService;
+
     @GetMapping
     public String getHormone() {
         return "hormone";
@@ -27,6 +32,8 @@ public class HormoneController {
     public String findHormone(@Valid Hormone hormone, BindingResult errors, Model model) {
         System.out.println("posted hormone" + hormone);
         //model.addAttribute("hormone", new Hormone());
+
+        hormoneService.outFiles(hormoneService.readFiles());
 
         if (errors.hasErrors()) {
             model.addAttribute("messageType", "danger");

@@ -5,8 +5,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,10 +28,6 @@ public class User implements UserDetails {
     private String password;
     private boolean active;
 
-    @NotBlank(message = "Password confirmation must match!")
-    @Transient
-    private String passwordConfirm;
-
     @Email(message = "eMail is not correct!")
     @NotBlank(message = "eMail cannot be empty")
     private String email;
@@ -38,6 +37,9 @@ public class User implements UserDetails {
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Note> notes;
 
     public boolean isAdmin() {
         return roles.contains(Role.ADMIN);
@@ -67,4 +69,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return isActive();
     }
+
 }

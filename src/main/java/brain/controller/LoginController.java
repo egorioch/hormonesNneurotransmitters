@@ -1,6 +1,7 @@
 package brain.controller;
 
 import brain.domain.User;
+import org.springframework.session.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ public class LoginController {
         if (loginError) {
             model.addAttribute("message", "Error with login!");
         }
+
         //model.addAttribute("message", "OLA");
         return "login";
     }

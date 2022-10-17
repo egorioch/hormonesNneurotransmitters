@@ -31,6 +31,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //следующие страницы требуют аутентификации
                     .anyRequest().authenticated()
                 .and()
+                .rememberMe()
+                .and()
                 //Настройка для входа в систему
                     .formLogin()
                     .loginPage("/login")

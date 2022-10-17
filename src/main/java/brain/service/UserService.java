@@ -57,6 +57,7 @@ public class UserService implements UserDetailsService {
 
     public boolean activateUser(String code) {
         User user = userRepo.findByActivationCode(code);
+        System.out.println("findByActivationCode: " + user);
 
         if (user == null) {
             return false;
@@ -64,7 +65,7 @@ public class UserService implements UserDetailsService {
 
         user.setActivationCode(null);
         user.setActive(true);
-
+        System.out.println("activateUser(после)" + user);
         userRepo.save(user);
 
         return true;
