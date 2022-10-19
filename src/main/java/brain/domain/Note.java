@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@Table(name = "note")
 @Data
 public class Note {
     @Id
@@ -18,13 +19,12 @@ public class Note {
     private User author;
 
     @NotBlank(message = "Fill the tag!")
-    @Length(max = 2048, message = "message too long(you can enter 1/4kB symbols)")
+    @Length(max = 255, message = "message too long(you can enter 1/4kB symbols)")
     private String tag;
 
-    @NotBlank(message = "Fill the message!")
+    @NotBlank(message = "Please enter a message in the textarea.")
     @Length(max = 2048, message = "message too long(you can enter 2kB symbols)")
     private String text;
-
 
 
 }

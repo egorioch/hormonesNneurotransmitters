@@ -29,22 +29,20 @@
          th:errors="*{text}">Tag Error!
     </div>
     <label class="ml-3" for="validationTextarea">Textarea</label>
-    <textarea class="form-control is-invalid ml-3"
+    <textarea class="form-control ml-3"
               id="validationTextarea" name="text"
               placeholder="Required example textarea" required></textarea>
-    <div class="invalid-feedback ml-3">
-        Please enter a message in the textarea.
-    </div>
 
     <button class="btn btn-primary m-3" type="submit">To publish</button>
 
     <!-- OUTPUT ALL NOTES-->
-    <table th:if="${notesList}" class="table table-sm table-dark">
+    <table th:if="${notesList != null}" class="table table-sm table-dark ml-3">
         <thead>
             <tr>
                 <th scope="col">Author</th>
                 <th scope="col">Tag</th>
                 <th scope="col">Text</th>
+                <th scope="col">Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -53,6 +51,7 @@
                     <td th:text="${noteObj.author.username}"></td>
                     <td th:text="${noteObj.tag}"></td>
                     <td th:text="${noteObj.text}"></td>
+                    <td><a th:if="${noteObj.author.id == user.id}" th:href="|/user-notes/${noteObj.author.id}|">edit</a></td>
                 </tr>
             </th:block>
         </tbody>

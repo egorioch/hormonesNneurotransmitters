@@ -1183,183 +1183,233 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="304" parent="289" name="user_role">
+    <table id="304" parent="289" name="note">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="305" parent="289" name="usr">
+    <table id="305" parent="289" name="user_role">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="306" parent="300" name="PRIMARY_ID">
+    <table id="306" parent="289" name="usr">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <column id="307" parent="300" name="PRIMARY_ID">
       <DataType>char(36)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="307" parent="300" name="SESSION_ID">
+    <column id="308" parent="300" name="SESSION_ID">
       <DataType>char(36)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="308" parent="300" name="CREATION_TIME">
+    <column id="309" parent="300" name="CREATION_TIME">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="309" parent="300" name="LAST_ACCESS_TIME">
+    <column id="310" parent="300" name="LAST_ACCESS_TIME">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="310" parent="300" name="MAX_INACTIVE_INTERVAL">
+    <column id="311" parent="300" name="MAX_INACTIVE_INTERVAL">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="311" parent="300" name="EXPIRY_TIME">
+    <column id="312" parent="300" name="EXPIRY_TIME">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="312" parent="300" name="PRINCIPAL_NAME">
+    <column id="313" parent="300" name="PRINCIPAL_NAME">
       <DataType>varchar(100)|0s</DataType>
       <Position>7</Position>
     </column>
-    <index id="313" parent="300" name="PRIMARY">
+    <index id="314" parent="300" name="PRIMARY">
       <ColNames>PRIMARY_ID</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="314" parent="300" name="SPRING_SESSION_IX1">
+    <index id="315" parent="300" name="SPRING_SESSION_IX1">
       <ColNames>SESSION_ID</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="315" parent="300" name="SPRING_SESSION_IX2">
+    <index id="316" parent="300" name="SPRING_SESSION_IX2">
       <ColNames>EXPIRY_TIME</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="316" parent="300" name="SPRING_SESSION_IX3">
+    <index id="317" parent="300" name="SPRING_SESSION_IX3">
       <ColNames>PRINCIPAL_NAME</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="317" parent="300" name="PRIMARY">
+    <key id="318" parent="300" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="318" parent="300" name="SPRING_SESSION_IX1">
+    <key id="319" parent="300" name="SPRING_SESSION_IX1">
       <UnderlyingIndexName>SPRING_SESSION_IX1</UnderlyingIndexName>
     </key>
-    <column id="319" parent="301" name="SESSION_PRIMARY_ID">
+    <column id="320" parent="301" name="SESSION_PRIMARY_ID">
       <DataType>char(36)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="320" parent="301" name="ATTRIBUTE_NAME">
+    <column id="321" parent="301" name="ATTRIBUTE_NAME">
       <DataType>varchar(200)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="321" parent="301" name="ATTRIBUTE_BYTES">
+    <column id="322" parent="301" name="ATTRIBUTE_BYTES">
       <DataType>blob|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <foreign-key id="322" parent="301" name="SPRING_SESSION_ATTRIBUTES_FK">
+    <foreign-key id="323" parent="301" name="SPRING_SESSION_ATTRIBUTES_FK">
       <ColNames>SESSION_PRIMARY_ID</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>PRIMARY_ID</RefColNames>
       <RefTableName>SPRING_SESSION</RefTableName>
     </foreign-key>
-    <index id="323" parent="301" name="PRIMARY">
+    <index id="324" parent="301" name="PRIMARY">
       <ColNames>SESSION_PRIMARY_ID
 ATTRIBUTE_NAME</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="324" parent="301" name="PRIMARY">
+    <key id="325" parent="301" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="325" parent="302" name="next_val">
+    <column id="326" parent="302" name="next_val">
       <DataType>bigint|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="326" parent="303" name="id">
+    <column id="327" parent="303" name="id">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="327" parent="303" name="feeling">
+    <column id="328" parent="303" name="feeling">
       <DataType>varchar(255)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="328" parent="303" name="hormone_name">
-      <DataType>varchar(255)|0s</DataType>
+    <column id="329" parent="303" name="hormone_name">
+      <DataType>varchar(30)|0s</DataType>
       <Position>3</Position>
     </column>
-    <index id="329" parent="303" name="PRIMARY">
+    <index id="330" parent="303" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="330" parent="303" name="PRIMARY">
+    <key id="331" parent="303" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="331" parent="304" name="user_id">
+    <column id="332" parent="304" name="id">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="332" parent="304" name="roles">
+    <column id="333" parent="304" name="tag">
       <DataType>varchar(255)|0s</DataType>
       <Position>2</Position>
     </column>
-    <foreign-key id="333" parent="304" name="FKfpm8swft53ulq2hl11yplpr5">
+    <column id="334" parent="304" name="text">
+      <DataType>varchar(2048)|0s</DataType>
+      <Position>3</Position>
+    </column>
+    <column id="335" parent="304" name="user_id">
+      <DataType>bigint|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <foreign-key id="336" parent="304" name="FKgq77x35wnx2x13llb4w8q9yg4">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>usr</RefTableName>
     </foreign-key>
-    <index id="334" parent="304" name="FKfpm8swft53ulq2hl11yplpr5">
+    <foreign-key id="337" parent="304" name="note_user_fk">
       <ColNames>user_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <column id="335" parent="305" name="id">
-      <DataType>bigint|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="336" parent="305" name="activation_code">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>2</Position>
-    </column>
-    <column id="337" parent="305" name="active">
-      <DataType>bit(1)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <column id="338" parent="305" name="email">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>4</Position>
-    </column>
-    <column id="339" parent="305" name="password">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>5</Position>
-    </column>
-    <column id="340" parent="305" name="username">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>6</Position>
-    </column>
-    <index id="341" parent="305" name="PRIMARY">
+      <RefColNames>id</RefColNames>
+      <RefTableName>usr</RefTableName>
+    </foreign-key>
+    <index id="338" parent="304" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="342" parent="305" name="PRIMARY">
+    <index id="339" parent="304" name="note_user_fk">
+      <ColNames>user_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="340" parent="304" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="341" parent="305" name="user_id">
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="342" parent="305" name="roles">
+      <DataType>varchar(255)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <foreign-key id="343" parent="305" name="FKfpm8swft53ulq2hl11yplpr5">
+      <ColNames>user_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>usr</RefTableName>
+    </foreign-key>
+    <foreign-key id="344" parent="305" name="role_user_fk">
+      <ColNames>user_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>usr</RefTableName>
+    </foreign-key>
+    <index id="345" parent="305" name="role_user_fk">
+      <ColNames>user_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <column id="346" parent="306" name="id">
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="347" parent="306" name="activation_code">
+      <DataType>varchar(255)|0s</DataType>
+      <Position>2</Position>
+    </column>
+    <column id="348" parent="306" name="active">
+      <DataType>bit(1)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="349" parent="306" name="email">
+      <DataType>varchar(255)|0s</DataType>
+      <Position>4</Position>
+    </column>
+    <column id="350" parent="306" name="password">
+      <DataType>varchar(30)|0s</DataType>
+      <Position>5</Position>
+    </column>
+    <column id="351" parent="306" name="username">
+      <DataType>varchar(255)|0s</DataType>
+      <Position>6</Position>
+    </column>
+    <index id="352" parent="306" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="353" parent="306" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

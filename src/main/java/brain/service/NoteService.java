@@ -15,7 +15,10 @@ public class NoteService {
     public List<Note> findAll() {return noteRepo.findAll();}
 
     public void save(Note note) {
-
         noteRepo.save(note);
+    }
+
+    public List<Note> findByAuthorId(Long id) {
+        return  noteRepo.findByAuthorId(id);
     }
 }
