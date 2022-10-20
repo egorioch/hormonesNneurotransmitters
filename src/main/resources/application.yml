@@ -39,6 +39,3 @@ mail:
 recaptcha:
   secret: 6LcGCHEiAAAAAPQcACh974IgYmGBBe7z0xZHdV7t
 
-java:
-  runtime:
-    version: 11.0.16
