@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -40,6 +41,25 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Note> notes;
+
+
+    //chanel_id, subscriber_id -- два первичных ключа; оба ссылаются на таблицу user
+    @ManyToMany
+    @JoinTable(
+            name = "user_subscribers", //имя таблица
+            joinColumns = { @JoinColumn(name = "channel_id") }, //главный для подписчиков
+            inverseJoinColumns = { @JoinColumn(name = "subscribers_id") } //столбец подписчиков
+    )
+    private Set<User> subscribers = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_subscriptions",
+            joinColumns = { @JoinColumn(name = "subscribers_id") },
+            inverseJoinColumns = { @JoinColumn(name = "channel_id") }
+    )
+    private Set<User> subscriptions = new HashSet<>();
+
 
     public boolean isAdmin() {
         return roles.contains(Role.ADMIN);

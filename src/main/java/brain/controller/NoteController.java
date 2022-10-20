@@ -90,6 +90,10 @@ public class NoteController {
         notes.forEach(System.out::println);
 
         model.addAttribute("notesList", notes);
+        model.addAttribute("userChanel", user);
+        model.addAttribute("subscriptionsCount", user.getSubscriptions().size());
+        model.addAttribute("subscribersCount", user.getSubscribers().size());
+
 
         return "/user-notes" + "/" + id;
     }
