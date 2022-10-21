@@ -44,7 +44,7 @@ public class User implements UserDetails {
 
 
     //chanel_id, subscriber_id -- два первичных ключа; оба ссылаются на таблицу user
-    @ManyToMany
+    /*@ManyToMany
     @JoinTable(
             name = "user_subscribers", //имя таблица
             joinColumns = { @JoinColumn(name = "channel_id") }, //главный для подписчиков
@@ -58,7 +58,7 @@ public class User implements UserDetails {
             joinColumns = { @JoinColumn(name = "subscribers_id") },
             inverseJoinColumns = { @JoinColumn(name = "channel_id") }
     )
-    private Set<User> subscriptions = new HashSet<>();
+    private Set<User> subscriptions = new HashSet<>();*/
 
 
     public boolean isAdmin() {

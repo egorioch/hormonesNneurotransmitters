@@ -91,8 +91,8 @@ public class NoteController {
 
         model.addAttribute("notesList", notes);
         model.addAttribute("userChanel", user);
-        model.addAttribute("subscriptionsCount", user.getSubscriptions().size());
-        model.addAttribute("subscribersCount", user.getSubscribers().size());
+        /*model.addAttribute("subscriptionsCount", user.getSubscriptions().size());
+        model.addAttribute("subscribersCount", user.getSubscribers().size());*/
 
 
         return "/user-notes" + "/" + id;
