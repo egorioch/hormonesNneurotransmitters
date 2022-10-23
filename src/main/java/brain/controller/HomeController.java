@@ -14,11 +14,11 @@ import java.io.FileInputStream;
 public class HomeController {
 
     @GetMapping("/")
-    public String getHome() {
+    public String getGreeting() {
         return "greeting";
     }
 
     @GetMapping("/home")
-    public String getGreeting()
+    public String getHome()
     { return "home"; }
 }

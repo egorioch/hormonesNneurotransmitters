@@ -1,6 +1,7 @@
 package brain.domain;
 
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,14 +9,14 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "usr")
-@Data
+@Getter
+@Setter
+
+@RequiredArgsConstructor
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,7 +25,7 @@ public class User implements UserDetails {
     @NotBlank(message = "Username cannot be empty")
     private String username;
 
-    @Size(min=2, max=30)
+    @Size(min=3, max=30)
     @NotBlank(message = "Password cannot be empty")
     private String password;
     private boolean active;
@@ -40,25 +41,25 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Note> notes;
+    private List<Note> notes;
 
 
     //chanel_id, subscriber_id -- два первичных ключа; оба ссылаются на таблицу user
-    /*@ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "user_subscribers", //имя таблица
+            name = "user_subscriptions", //имя таблица
             joinColumns = { @JoinColumn(name = "channel_id") }, //главный для подписчиков
-            inverseJoinColumns = { @JoinColumn(name = "subscribers_id") } //столбец подписчиков
+            inverseJoinColumns = { @JoinColumn(name = "subscriber_id") } //столбец подписчиков
     )
     private Set<User> subscribers = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_subscriptions",
-            joinColumns = { @JoinColumn(name = "subscribers_id") },
+            joinColumns = { @JoinColumn(name = "subscriber_id") },
             inverseJoinColumns = { @JoinColumn(name = "channel_id") }
     )
-    private Set<User> subscriptions = new HashSet<>();*/
+    private Set<User> subscriptions = new HashSet<>();
 
 
     public boolean isAdmin() {
@@ -89,5 +90,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return isActive();
     }
+
 
 }

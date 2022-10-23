@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @Controller
@@ -61,19 +63,62 @@ public class NoteController {
         }
 
         noteService.save(note);
-        //Iterable<Note> notes = noteService.findAll();
-        //model.addAttribute("notesList", notes);
+        //user.getNotes().add(note);
 
         return "redirect:/notes";
     }
 
-    /*@GetMapping("/user-notes")
-    public String getMyNotes(@AuthenticationPrincipal User user) {
-        System.out.println("user in user-notes: " + user);
+    /*
+    @GetMapping("/user-notes/{userChannelId}")
+    public String noteUserProfile(@AuthenticationPrincipal User currentUser,
+                             @PathVariable("userChannelId") Long userChannelId,
+                             Model model) {
+        Optional<User> userChannelOptional = userRepo.findById(userChannelId);
+        System.out.println("userChannel bu userChannelID: " + userChannelId);
 
-        return "user-notes";
+        User userChannel = new User();
+        if (userChannelOptional.isPresent()) {
+            userChannel = userChannelOptional.get();
+        } else {
+            System.out.println("userChannel is empty by Optional");
+        }
+
+        System.out.println("userChannel: " + userChannel);
+        System.out.println("currentUser: " + currentUser);
+        System.out.println("userChannel.id == " + userChannel);
+
+        //страница пользователя, на которую мы перешли
+        model.addAttribute("userChannel", userChannel);
+        model.addAttribute("currentUser", currentUser);
+
+
+        // 1) положить конкретное сообщение
+        // 2) положить весь список, который можно отредактировать
+        Set<Note> notes = userChannel.getNotes();
+
+        System.out.println("got notes: ");
+        notes.forEach(System.out::println);
+
+        //является ли перешедший на страницу пользователь подписчиком этой страницы
+        boolean isCurrentUser = Objects.equals(currentUser.getId(), userChannel.getId());
+
+        model.addAttribute("notesList", notes);
+
+
+        //количество подписок
+        model.addAttribute("subscriptionsCount", userChannel.getSubscriptions().size());
+        //число подписчиков
+        model.addAttribute("subscribersCount", userChannel.getSubscribers().size());
+        //является ли та страница, на которую мы перешли, нашей.
+        model.addAttribute("isCurrentUser", isCurrentUser);
+        model.addAttribute("isSubscriber", userChannel.getSubscribers().contains(currentUser));
+
+
+        return "/user-notes" + "/" + userChannel.getId();
     }*/
 
+    //переход по кнопке edit
+    //вообще, можно сделать всю проверку здесь: если authUser == userEditId --разрешить редактирование
     @GetMapping("/user-notes/{id}")
     public String updateNote(@AuthenticationPrincipal User user,
                              @PathVariable("id") Long id,
@@ -84,18 +129,18 @@ public class NoteController {
         System.out.println("id == " + id);
         // 1) положить конкретное сообщение
         // 2) положить весь список, который можно отредактировать
-        Set<Note> notes = user.getNotes();
+        /*List<Note> notes = user.getNotes();
 
         System.out.println("got notes: ");
-        notes.forEach(System.out::println);
+        for (var nt: notes) {
+            System.out.println("note: " + nt.getTag());
+        }*/
 
+        List<Note> notes = noteService.getNotesByAuthorId(id);
+        System.out.println("userNotesByRepo: "); notes.forEach(System.out::println);
         model.addAttribute("notesList", notes);
-        model.addAttribute("userChanel", user);
-        /*model.addAttribute("subscriptionsCount", user.getSubscriptions().size());
-        model.addAttribute("subscribersCount", user.getSubscribers().size());*/
 
-
-        return "/user-notes" + "/" + id;
+        return "user-notes"; //+ "/" + id;
     }
 
 }

@@ -20,7 +20,7 @@
          th:errors="*{tag}">Tag Error!
     </div>
     <div class="input-group flex-nowrap p-3">
-        <span class="input-group-text" id="addon-wrapping">tag</span>
+        <span class="input-group-text" id="addon-wrapping">Tag</span>
         <input type="text" class="form-control" name="tag" placeholder="tag" aria-label="tag" aria-describedby="addon-wrapping">
     </div>
 
@@ -28,7 +28,7 @@
     <div th:if="${#fields.hasErrors('text')}" class="alert alert-danger"
          th:errors="*{text}">Tag Error!
     </div>
-    <label class="ml-3" for="validationTextarea">Textarea</label>
+    <label class="ml-3" for="validationTextarea">Note</label>
     <textarea class="form-control ml-3"
               id="validationTextarea" name="text"
               placeholder="Required example textarea" required></textarea>
@@ -48,7 +48,7 @@
         <tbody>
             <th:block th:each="noteObj: ${notesList}">
                 <tr>
-                    <td th:text="${noteObj.author.username}"></td>
+                    <td><a th:href="|/user-notes/${noteObj.author.username}|" th:text="${noteObj.author.username}"></a></td>
                     <td th:text="${noteObj.tag}"></td>
                     <td th:text="${noteObj.text}"></td>
                     <td><a th:if="${noteObj.author.id == user.id}" th:href="|/user-notes/${noteObj.author.id}|">edit</a></td>
