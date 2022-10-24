@@ -119,26 +119,37 @@ public class NoteController {
 
     //переход по кнопке edit
     //вообще, можно сделать всю проверку здесь: если authUser == userEditId --разрешить редактирование
-    @GetMapping("/user-notes/{id}")
+    @GetMapping("/user-notes/{userChannel}")
     public String updateNote(@AuthenticationPrincipal User user,
-                             @PathVariable("id") Long id,
+                             @PathVariable("userChannel") User userChannel,
                              Model model) {
 
         model.addAttribute("user", user);
-        System.out.println("user in updateNote == " + user);
-        System.out.println("id == " + id);
-        // 1) положить конкретное сообщение
-        // 2) положить весь список, который можно отредактировать
-        /*List<Note> notes = user.getNotes();
+        model.addAttribute("userChannel", userChannel);
+        System.out.println("user in updateNote == " + user.getUsername());
+        System.out.println("Channel == " + userChannel.getUsername());
 
-        System.out.println("got notes: ");
-        for (var nt: notes) {
-            System.out.println("note: " + nt.getTag());
-        }*/
 
-        List<Note> notes = noteService.getNotesByAuthorId(id);
-        System.out.println("userNotesByRepo: "); notes.forEach(System.out::println);
-        model.addAttribute("notesList", notes);
+        List<Note> notes = userChannel.getNotes();//noteService.getNotesByAuthorId(userChannel.getId());
+        System.out.println("userNotesByRepo: "); notes.forEach(note -> System.out.println(note.getTag()));
+
+        //является ли текущий пользователь хозяином страницы
+        boolean isCurrentUser = user.getId().equals(userChannel.getId());
+        System.out.println("Текущий пользователь -- хозяин страницы: " + isCurrentUser);
+
+        //Текущий пользователь -- подписчик канала
+        boolean isSubscriber = userChannel.getSubscribers().contains(user);
+        System.out.println("Текущий пользователь -- подписичик канала: " + isSubscriber);
+
+        System.out.println("Число подписок: " + userChannel.getSubscriptions().size());
+        System.out.println("Число подписчиков: " + userChannel.getSubscribers().size());
+
+        model.addAttribute("notesUserList", notes);
+        model.addAttribute("subscriptionsCount", userChannel.getSubscriptions().size());
+        model.addAttribute("subscribersCount", userChannel.getSubscribers().size());
+        model.addAttribute("isCurrentUser", isCurrentUser);
+        model.addAttribute("isSubscriber", isSubscriber);
+
 
         return "user-notes"; //+ "/" + id;
     }

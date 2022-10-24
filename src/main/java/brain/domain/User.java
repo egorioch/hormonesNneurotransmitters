@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.*;
 
 @Entity
@@ -17,7 +18,7 @@ import java.util.*;
 @Setter
 
 @RequiredArgsConstructor
-public class User implements UserDetails {
+public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -90,6 +91,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return isActive();
     }
-
 
 }

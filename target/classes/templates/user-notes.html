@@ -13,22 +13,49 @@
 
 <body>
 
-<form th:action="@{/user-notes/${id}}" method="post" th:object="${user}">
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/">Horneur</a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/profile">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/notes">Notes</a>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+<form th:action="@{/user-notes/${userChannel}}" method="post" th:object="${user}">
 
     <!-- Текущий юзер -->
-    <!--
-    <div class="" th:value="${userChannel.username}"></div>
+    <div class="card mx-auto m-3" align="center" style="width: 18rem;">
+        <img class="card-img-top" src="/img/feval.jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${userChannel.username}"></h5>
 
-    <div class="" th:if="${!isCurrentUser}">
-        <div th:if="${isSubscriber}">
-            <a class="btn btn-secondary" th:href="|/user-notes/unsubscribe/${userChannel.id}|">Unsubscribe</a>
-        </div>
-        <div th:if="${isCurrentUser}">
-            <a class="btn btn-info" th:href="|/user-notes/subscribe/${userChannel.id}|">Subscribe</a>
+            <div class="" th:if="${!isCurrentUser}">
+                <div th:if="${isSubscriber}">
+                    <a class="btn btn-secondary" th:href="|/user-notes/unsubscribe/${userChannel}|">Unsubscribe</a>
+                </div>
+                <div th:if="${!isSubscriber}">
+                    <a class="btn btn-info" th:href="|/user-notes/subscribe/${userChannel}|">Subscribe</a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <подписки и подписчики >
+    <!-- подписки и подписчики -->
     <div class="container" th:if="${isCurrentUser}">
         <div class="row">
             <div class="col">
@@ -36,7 +63,8 @@
                     <div class="card-body">
                         <div class="card-title">Subscriptions</div>
                         <h3 class="card-text">
-                            <a th:href="|/user/subscriptions/${userChannel.id}|" th:value="${subscriptionsCount}"></a>
+                            <a th:href="|/user/subscriptions/${userChannel.id}|"
+                               th:text="${subscriptionsCount == null ? 0 : subscriptionsCount}"></a>
                         </h3>
                     </div>
                 </div>
@@ -46,13 +74,14 @@
                     <div class="card-body">
                         <div class="card-title">Subscriptions</div>
                         <h3 class="card-text">
-                            <a th:href="|/user/subscriptions/${userChannel.id}|" th:value="${subscribersCount}"></a>
+                            <a th:href="|/user/subscriptions/${userChannel.id}|"
+                               th:text="${subscribersCount == null ? 0 : subscribersCount}"></a>
                         </h3>
                     </div>
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <!-- OUTPUT ALL NOTES -->
     <table th:if="${notesList != null}" class="table table-sm table-dark">
@@ -65,7 +94,7 @@
         </tr>
         </thead>
         <tbody>
-        <th:block th:if="${noteObj.author.id == user.id}" th:each="noteObj: ${user.notes}">
+        <th:block th:each="noteObj: ${notesUserList}">
             <tr>
                 <td th:text="${noteObj.author.username}"></td>
                 <td th:text="${noteObj.tag}"></td>

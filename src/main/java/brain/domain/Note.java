@@ -1,20 +1,20 @@
 package brain.domain;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "note")
 @Getter
 @Setter
 
+@RequiredArgsConstructor
 public class Note implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
