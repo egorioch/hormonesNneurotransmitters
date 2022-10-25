@@ -75,5 +75,43 @@ public class UserController {
         return "redirect:/user/profile";
     }
 
+    @GetMapping("/subscribe/{userChannel}")
+    public String subscribe(@AuthenticationPrincipal User user,
+                                   @PathVariable("userChannel") User userChannel) {
+
+        userService.subscribe(userChannel, user);
+
+        return "redirect:/user-notes/" + userChannel.getId();
+    }
+
+    @GetMapping("/unsubscribe/{userChannel}")
+    public String unsubscribe(@AuthenticationPrincipal User user,
+                                   @PathVariable("userChannel") User userChannel) {
+
+        userService.unsubscribe(userChannel, user);
+
+        return "redirect:/user-notes/" + userChannel.getId();
+    }
+
+    //ссылка обрабатывается сперва контроллером, а уже потом высылается представление
+    @GetMapping("{type}/{userChannel}/list")
+    public String subscriptionsList(@AuthenticationPrincipal User user,
+                                    @PathVariable("type") String type,
+                                    @PathVariable("userChannel") User userChannel,
+                                    Model model) {
+        model.addAttribute("userChannel", userChannel);
+        model.addAttribute("type", type);
+
+        //выводим список в зависимости от того, что за ссылка -- подписчики или подписки
+        if ("subscriptions".equals(type)) {
+            model.addAttribute("users", userChannel.getSubscriptions());
+        } else if ("subscribers".equals(type)) {
+            model.addAttribute("users", userChannel.getSubscribers());
+        }
+
+        return "subscriptions";
+    }
+
+
 
 }

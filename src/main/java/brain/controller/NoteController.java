@@ -127,7 +127,7 @@ public class NoteController {
         model.addAttribute("user", user);
         model.addAttribute("userChannel", userChannel);
         System.out.println("user in updateNote == " + user.getUsername());
-        System.out.println("Channel == " + userChannel.getUsername());
+        System.out.println("Channel == " + userChannel.hashCode());
 
 
         List<Note> notes = userChannel.getNotes();//noteService.getNotesByAuthorId(userChannel.getId());
@@ -151,7 +151,7 @@ public class NoteController {
         model.addAttribute("isSubscriber", isSubscriber);
 
 
-        return "user-notes"; //+ "/" + id;
+        return "user-notes";
     }
 
 }

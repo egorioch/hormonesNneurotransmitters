@@ -113,4 +113,27 @@ public class UserService implements UserDetailsService {
         userRepo.save(user);
     }
 
+    public void subscribe(User userChannel, User user) {
+        userChannel.getSubscribers().add(user);
+        //В контроллере не работает метод CONTAINS, когда получаем булевый тип. Нужно проверить(мб беда с хешом).
+        System.out.println("userChannel(in userControl): " + userChannel.hashCode());
+        System.out.println("user:" + user);
+        if (userChannel.getSubscribers().contains(user)) {
+            System.out.println("Текущий пользователь является подписчиком");
+        } else {
+            System.out.println("не подписчик");
+        }
+        System.out.println("текущие подписчики: ");
+        userChannel.getSubscribers().forEach(us -> System.out.println(us.getUsername()));
+
+        //сохраняем изменения
+        userRepo.save(userChannel);
+    }
+
+    public void unsubscribe(User userChannel, User user) {
+        userChannel.getSubscribers().remove(user);
+
+        //сохраняем изменения
+        userRepo.save(userChannel);
+    }
 }
