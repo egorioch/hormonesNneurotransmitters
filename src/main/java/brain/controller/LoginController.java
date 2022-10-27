@@ -27,7 +27,6 @@ public class LoginController {
 
     @PostMapping
     public String enterInAccount(Model model, User user) {
-
         System.out.println(user);
 
         return "home";

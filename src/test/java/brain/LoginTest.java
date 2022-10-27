@@ -14,6 +14,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -50,6 +52,7 @@ public class LoginTest {
                 .andExpect(redirectedUrl("http://localhost/login"));
     }
 
+
     //взаимодействие идёт с данными бд, которая установлена в пропертях
     @Test
     public void correctLogin() throws Exception {
@@ -59,6 +62,23 @@ public class LoginTest {
                 //после "вхождения" в систему, нас, 302 запросом, перенаправит на главную страницу
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/home"));
+    }
+
+    @Test
+    public void testNameAtHomeAfterLogin() throws Exception{
+        this.mockMvc.perform(get("/home").with(user("admin").password("123")))
+                .andDo(print())
+                .andExpect(authenticated())
+                .andExpect(xpath("//*[@id=\"navbarTogglerDemo03\"]/ul/li[2]/a").string("admin"));
+    }
+
+    @Test
+    public void testName() throws Exception {
+        //метод смотрит как в контексте объявили login-page и вызывает обращение к странице
+        this.mockMvc.perform(get("/home").with(user("admin").password("123")))
+                .andDo(print())
+                .andExpect(xpath("//*[@id=\"navbarTogglerDemo03\"]/ul/li[3]/a")
+                        .string("Notes"));
     }
 
     //отбивка на неправильные данные пользователя

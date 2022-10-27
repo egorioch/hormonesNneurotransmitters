@@ -5,12 +5,13 @@ spring:
     expose-request-attributes: true
 
   jpa:
+    show-sql: false
     hibernate:
       ddl-auto: update
-      show-sql: true
+    generate-ddl: false
 
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/hormones_base
+    url: jdbc:mysql://localhost:3306/hormones_base
     username: springuser
     password: 11afamet
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -29,6 +30,12 @@ spring:
     jdbc:
       initialize-schema: always
       table-name: SPRING_SESSION
+
+  flyway:
+    user: springuser
+    password: 11afamet
+    url: jdbc:mysql://localhost:3306/hormones_base
+    baseline-on-migrate: true
 
 upload:
   path: /home/egor/Документы/java/uploads

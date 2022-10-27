@@ -1,0 +1,47 @@
+spring:
+  thymeleaf:
+    cache: false
+  freemarker:
+    expose-request-attributes: true
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      show-sql: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/hormone_test
+    username: springuser
+    password: 11afamet
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  mail:
+    host: smtp.yandex.ru
+    username: egornesobaka@yandex.ru
+    password: tqortbmzealzwhum
+    port: 465
+    protocol: smtps
+  sql:
+    init:
+      mode: always
+
+  session:
+    jdbc:
+      initialize-schema: always
+      table-name: SPRING_SESSION
+
+  flyway:
+    user: springuser
+    password: 11afamet
+    url: jdbc:mysql://localhost:3306/hormones_base
+    baseline-on-migrate: true
+
+upload:
+  path: /home/egor/Документы/java/uploads
+
+mail:
+  debug: true
+
+recaptcha:
+  secret: 6LcGCHEiAAAAAPQcACh974IgYmGBBe7z0xZHdV7t
+

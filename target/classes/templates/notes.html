@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>BrainNotes</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous" />
 </head>
 
 <body>
@@ -44,7 +44,7 @@
     </div>
     <div class="input-group flex-nowrap p-3">
         <span class="input-group-text" id="addon-wrapping">Tag</span>
-        <input type="text" class="form-control" name="tag" placeholder="tag" aria-label="tag" aria-describedby="addon-wrapping">
+        <input type="text" class="form-control" name="tag" placeholder="tag" aria-label="tag" aria-describedby="addon-wrapping" />
     </div>
 
     <!-- TEXT -->
@@ -59,7 +59,7 @@
     <button class="btn btn-primary m-3" type="submit">To publish</button>
 
     <!-- OUTPUT ALL NOTES-->
-    <table th:if="${notesList != null}" class="table table-sm table-dark ml-3">
+    <table th:if="${notesList != null}" class="table table-sm table-dark ml-3" id="table-notes">
         <thead>
             <tr>
                 <th scope="col">Author</th>
