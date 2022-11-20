@@ -1,4 +1,3 @@
-
 create table user_subscriptions (
     subscriber_id bigint not null,
     channel_id bigint not null,

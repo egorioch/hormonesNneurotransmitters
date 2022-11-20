@@ -1,6 +1,9 @@
 package brain;
 
 import brain.controller.NoteController;
+import brain.domain.Role;
+import brain.domain.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,11 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.StatusAssertions;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
@@ -87,6 +95,28 @@ public class LoginTest {
         this.mockMvc.perform(post("/login").param("user", "burunduk"))
                 .andDo(print())
                 .andExpect(redirectedUrl("/login?error=true"));
+    }
+
+    @Autowired
+    private ObjectMapper objectMapper;
+    @Test
+    public void successUpdateProfile() throws  Exception {
+        User user = new User();
+        user.setUsername("anton");
+        user.setEmail("vaflya@lay.ru");
+        user.setPassword("123");
+        Set<Role> roleSet = Arrays.stream(Role.values()).collect(Collectors.toSet());
+        user.setRoles(roleSet);
+
+        this.mockMvc.perform(post("/user/profile")
+                        .with(user("admin").password("123").roles("USER", "ADMIN"))
+                .content(objectMapper.writeValueAsString(user)))
+                .andExpect(redirectedUrl("/user/profile"));
+    }
+
+    @Test
+    public void controllerIsNullTest() {
+        assertThat(controller).isNotNull();
     }
 
 }

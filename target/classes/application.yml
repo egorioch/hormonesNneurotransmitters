@@ -41,8 +41,9 @@ upload:
   path: /home/egor/Документы/java/uploads
 
 mail:
-  debug: true
+  debug: false
 
 recaptcha:
   secret: 6LcGCHEiAAAAAPQcACh974IgYmGBBe7z0xZHdV7t
 
+hostname: 195.133.146.1

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
@@ -19,8 +20,10 @@ import org.springframework.test.web.reactive.server.StatusAssertions;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.ui.Model;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.Mockito.doReturn;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
@@ -45,7 +48,7 @@ public class NoteControllerTest {
     @Autowired
     private NoteController noteController;
 
-    @Qualifier
+    @MockBean
     private UserService userService;
 
 
@@ -80,7 +83,46 @@ public class NoteControllerTest {
         this.mockMvc.perform(multipart)
                 .andDo(print())
                 .andExpect(xpath("//*[@id='table-notes']/tbody/tr[1]/td[2]").exists());
+    }
+
+    @Test
+    public void testPostInputFieldsNodesByUpdateUser() throws Exception{
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword("123");
+        user.setEmail("bebraSlhypa@mail.ru");
 
 
+        this.mockMvc.perform(post("/user/profile").with(user(user))
+                        .param("email", "suslik@bebera.ru")
+                        .param("password", "1234"))
+                .andDo(print())
+                .andExpect(authenticated())
+                .andExpect(xpath("//*[@id=\"my-fields-class\"]").exists());
+    }
+
+    @Test
+    public void testGetInputFieldsNodesByUpdateUser() throws Exception{
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword("123");
+        user.setEmail("bebraSlhypa@mail.ru");
+
+        this.mockMvc.perform(get("/user/profile").with(user(user)))
+                .andDo(print())
+                .andExpect(content().string(containsString("change")));
+    }
+
+    // нужно ещё протестить отображаемый Login, но это уже, наверное, с помощью UserDetails.
+    @Test
+    public void testQuantityNodesUpdateProfile() throws Exception {
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword("123");
+        user.setEmail("bebraSlhypa@mail.ru");
+
+        this.mockMvc.perform(get("/user/profile").with(user(user)))
+                .andDo(print())
+                .andExpect(xpath("//*[@id=\"my-fields-class\"]/div[1]/label").nodeCount(2));
     }
 }
