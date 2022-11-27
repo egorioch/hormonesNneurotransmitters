@@ -1,7 +1,9 @@
 package brain.domain;
 
 import brain.domain.util.NoteHelper;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.hibernate.Hibernate;
@@ -24,6 +26,7 @@ public class Note implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
@@ -42,6 +45,7 @@ public class Note implements Serializable {
         return NoteHelper.getAuthorName(author);
     }
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "note_likes",

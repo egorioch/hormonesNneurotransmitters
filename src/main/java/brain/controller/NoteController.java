@@ -12,10 +12,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponents;
@@ -24,6 +26,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.persistence.EntityManager;
 import javax.validation.Valid;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Controller
@@ -75,6 +78,10 @@ public class NoteController {
 
         model.addAttribute("notesPage", notesPage);
 
+        //инжектируется в модель только чтобы использовать в js-скрипте.
+        //лучше потом ЭТО ЗАМЕНИТЬ
+        model.addAttribute("username", user.getUsername());
+
         return "notes";
     }
 
@@ -84,7 +91,7 @@ public class NoteController {
         return Arrays.stream(sizes).boxed().toList();
     }
 
-    @PostMapping("/notes")
+    /*@PostMapping("/notes")
     public String addNote(@AuthenticationPrincipal User user,
                           @Valid Note note,
                           BindingResult bindingResult,
@@ -100,6 +107,38 @@ public class NoteController {
         //user.getNotes().add(note);
 
         return "redirect:/notes";
+    }*/
+
+    @PostMapping("/sendNote")
+    @ResponseBody
+    public ResponseEntity<?> toPostNoteOnPage(@AuthenticationPrincipal User user,
+                                              @Valid @RequestBody Note note,
+                                              BindingResult errors,
+                                              Model model) {
+        note.setAuthor(user);
+
+        System.out.println("Достигли отметки");
+
+        if (errors.hasErrors()) {
+            System.out.println("Возникли ошибочки!");
+
+            return ResponseEntity.badRequest().body(
+                    errors.getAllErrors()
+                            .stream().map(x -> x.getDefaultMessage())
+                            .collect(Collectors.joining(","))
+            );
+        }
+
+
+        noteService.save(note);
+        //user.getNotes().add(note);
+
+        System.out.println("полученный note: " + note.getTag() +
+                ", text: " + note.getText() + ", author: "
+                + note.getAuthorName() + ", id: " + note.getId());
+        model.addAttribute("newCard", "notNull");
+
+        return ResponseEntity.ok(note);
     }
 
 

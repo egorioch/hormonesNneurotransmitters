@@ -6,11 +6,18 @@
     <title>BrainNotes</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <script type="text/javascript" src="/js/jquery-3.6.1.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
+
+
 </head>
+
+<script>
+    let username = "[[${username}]]";
+</script>
 
 <body>
 <!-- Navbar -->
@@ -38,28 +45,39 @@
 </nav>
 
 
-<form th:action="@{/notes}" method="post" th:object="${note}">
+<form th:action="@{/notes}" method="post" th:object="${note}" id="note-form">
 
     <!-- TAG -->
-    <div th:if="${#fields.hasErrors('tag')}" class="alert alert-danger"
+    <!-- заменяем стандартный(статический) вывод ошибки на
+    вывод ошибки с помощью Ajax-->
+    <div id="tagError"></div>
+    <!--div th:if="${#fields.hasErrors('tag')}" class="alert alert-danger"
          th:errors="*{tag}">Tag Error!
-    </div>
+    </div-->
     <div class="input-group flex-nowrap p-3">
         <span class="input-group-text" id="addon-wrapping">Tag</span>
-        <input type="text" class="form-control" name="tag" placeholder="tag" aria-label="tag"
-               aria-describedby="addon-wrapping"/>
+        <input type="text" class="form-control" name="tag" aria-label="tag"
+               aria-describedby="addon-wrapping" id="tag"/>
     </div>
+
 
     <!-- TEXT -->
-    <div th:if="${#fields.hasErrors('text')}" class="alert alert-danger"
-         th:errors="*{text}">Tag Error!
+    <!-- заменяем стандартный(статический) вывод ошибки на
+    вывод ошибки с помощью Ajax-->
+    <div id="textError"></div>
+    <!--div th:if="${#fields.hasErrors('text')}" class="alert alert-danger"
+         th:errors="*{text}" id="textError">Tag Error!
+    </--div-->
+    <div class="input-group flex-nowrap p-3">
+        <label class="input-group-text" for="text">Note</label>
+        <textarea class="form-control"
+                  id="text" name="text"
+                  placeholder="Required example textarea" required></textarea>
     </div>
-    <label class="ml-3" for="validationTextarea">Note</label>
-    <textarea class="form-control ml-3"
-              id="validationTextarea" name="text"
-              placeholder="Required example textarea" required></textarea>
 
     <button class="btn btn-primary m-3" type="submit">To publish</button>
+    <h3>RequestNote:</h3>
+    <div id="requestNote"></div>
 
 
     <div th:if="${notesPage != null}" class="ml-3" id="table-notes">
@@ -139,15 +157,20 @@
                     </div>
                 </div>
             </th:block>
+
+            <!-- НОВАЯ КАРТОЧКА -->
+            <div id="my_new_card" class="card my-3" style="width: 18rem;">
+
+            </div>
         </div>
     </div>
 
 
+    <!-- Подключение скрипта, отвечающего за отправку сообщения-->
+    <script type="text/javascript" src="/js/note.js"></script>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
             crossorigin="anonymous"></script>
