@@ -48,7 +48,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <!--dependency>
+        <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
             <version>8.5.13</version>
@@ -57,7 +57,7 @@
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-mysql</artifactId>
             <version>8.5.13</version>
-        </dependency-->
+        </dependency>
 
 
         <!-- Lombok -->
@@ -163,7 +163,7 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <!--plugin>
+            <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>8.5.13</version>
@@ -174,7 +174,7 @@
                     <schemas>hormones_base</schemas>
                     <cleanDisabled>false</cleanDisabled>
                 </configuration>
-            </plugin-->
+            </plugin>
         </plugins>
     </build>
 </project>
