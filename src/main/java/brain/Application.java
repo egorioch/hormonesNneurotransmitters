@@ -13,7 +13,6 @@ import java.util.List;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = {"brain.repos"})
-@ComponentScan(basePackages = {"brain"})
 public class Application {
 
     public static void main(String[] args) {
