@@ -14,10 +14,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = {"brain.repos"})
-@EntityScan("brain.domain")
-//В ComponentScan нужно указать вообще все модули, иначе спринг их просто не увидит(для Heroku)
-@ComponentScan(basePackages = {"brain.service", "brain.config", "brain.controller"})
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

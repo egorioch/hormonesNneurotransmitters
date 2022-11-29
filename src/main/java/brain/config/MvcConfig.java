@@ -10,7 +10,6 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@ComponentScan("brain.service")
 public class MvcConfig implements WebMvcConfigurer {
 
     @Bean

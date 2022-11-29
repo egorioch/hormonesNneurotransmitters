@@ -11,7 +11,6 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "brain.repos")
 public class MailConfig {
     @Value("${spring.mail.host}")
     private String host;
