@@ -1,7 +1,9 @@
 package brain;
 
+import brain.service.MailSender;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
@@ -11,8 +13,9 @@ import java.util.List;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = {"brain.repos"})
-@ComponentScan(basePackages = {"brain.service"})
+@ComponentScan(basePackages = {"brain"})
 public class Application {
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

@@ -36,6 +36,8 @@ spring:
     password: 11afamet
     url: jdbc:mysql://localhost:3306/hormones_base
     baseline-on-migrate: true
+  main:
+    allow-bean-definition-overriding: true
 
 upload:
   path: /home/egor/Документы/java/uploads/
@@ -47,3 +49,5 @@ recaptcha:
   secret: 6LcGCHEiAAAAAPQcACh974IgYmGBBe7z0xZHdV7t
 
 hostname: 195.133.146.1
+
+
