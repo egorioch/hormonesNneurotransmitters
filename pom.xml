@@ -39,6 +39,7 @@
         </dependency>
 
         <!-- DataBase support -->
+        <!-- ...data-jpa удаляется с целью исправить ошибку с регистрацией bean'а-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>

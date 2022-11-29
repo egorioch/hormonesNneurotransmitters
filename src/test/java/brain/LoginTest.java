@@ -9,14 +9,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.reactive.server.StatusAssertions;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -40,7 +37,7 @@ public class LoginTest {
     StatusAssertions statusAssertions;
 
     @Autowired
-    private NoteController controller;
+    private NoteController myController;
 
     @Test
     public void test() throws Exception {
@@ -116,7 +113,7 @@ public class LoginTest {
 
     @Test
     public void controllerIsNullTest() {
-        assertThat(controller).isNotNull();
+        assertThat(myController).isNotNull();
     }
 
 }
