@@ -11,7 +11,7 @@ import java.util.List;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = {"brain.repos"})
-//@ComponentScan(basePackages = {"brain.service"})
+@ComponentScan(basePackages = {"brain.service"})
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
