@@ -38,7 +38,7 @@ spring:
     baseline-on-migrate: true
 
 upload:
-  path: /home/egor/Документы/java/uploads
+  path: /home/egor/Документы/java/uploads/
 
 mail:
   debug: false

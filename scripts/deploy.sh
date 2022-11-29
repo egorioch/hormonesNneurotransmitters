@@ -14,7 +14,7 @@ echo 'Restart server...'
 #eof -- указывает, что мы будем передавать блок данных
 #pgrep -- получает id процесса, xargs его забирает и заканчивает
 # & -- знак, говорящий о том, что процесс уйдёт в фон после команды
-ssh -i ~/.ssh/id_rsa.pub seesoon21@195.133.146.1 <<EOF
+ssh -i ~/.ssh/id_rsa.pub seesoon21@195.133.146.1 << EOF
 
 pgrep java | xargs kill -9
 nohup java -jar hormonesNneurotransmitters-1.0-SNAPSHOT.jar > log.txt &
