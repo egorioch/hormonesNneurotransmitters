@@ -27,9 +27,9 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
-    public String userSave( @RequestParam String name,
-                            @RequestParam Map<String, String> form,
-                            @RequestParam("userId") User user) {
+    public String userSave(@RequestParam String name,
+                           @RequestParam Map<String, String> form,
+                           @RequestParam("userId") User user) {
 
         System.out.println("name(userSave.UserController): " + name);
         System.out.println("user(userSave): " + user);
@@ -77,18 +77,23 @@ public class UserController {
 
     @GetMapping("/subscribe/{userChannel}")
     public String subscribe(@AuthenticationPrincipal User user,
-                                   @PathVariable("userChannel") User userChannel) {
+                            @PathVariable("userChannel") User userChannel,
+                            Model model) {
 
         userService.subscribe(userChannel, user);
 
+        System.out.println("Ща буит редиректить");
         return "redirect:/user-notes/" + userChannel.getId();
     }
 
     @GetMapping("/unsubscribe/{userChannel}")
     public String unsubscribe(@AuthenticationPrincipal User user,
-                                   @PathVariable("userChannel") User userChannel) {
+                              @PathVariable("userChannel") User userChannel,
+                              Model model) {
 
         userService.unsubscribe(userChannel, user);
+
+
 
         return "redirect:/user-notes/" + userChannel.getId();
     }
@@ -111,7 +116,6 @@ public class UserController {
 
         return "subscriptions";
     }
-
 
 
 }

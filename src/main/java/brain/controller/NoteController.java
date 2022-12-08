@@ -162,6 +162,7 @@ public class NoteController {
         boolean isCurrentUser = user.getId().equals(userChannel.getId());
         //Текущий пользователь -- подписчик канала
         boolean isSubscriber = userChannel.getSubscribers().contains(user);
+        System.out.println("Подписчик ли(NoteController)? " + isSubscriber);
 
         System.out.println("Число подписок: " + userChannel.getSubscriptions().size());
         System.out.println("Число подписчиков: " + userChannel.getSubscribers().size());
@@ -171,6 +172,10 @@ public class NoteController {
         model.addAttribute("subscribersCount", userChannel.getSubscribers().size());
         model.addAttribute("isCurrentUser", isCurrentUser);
         model.addAttribute("isSubscriber", isSubscriber);
+
+        //for webSocket
+        model.addAttribute("userChannelUsername", userChannel.getUsername());
+        model.addAttribute("userUsername", user.getUsername());
 
         return "user-notes";
     }

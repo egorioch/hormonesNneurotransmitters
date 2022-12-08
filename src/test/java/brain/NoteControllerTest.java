@@ -113,6 +113,18 @@ public class NoteControllerTest {
                 .andExpect(content().string(containsString("change")));
     }
 
+    @Test
+    public void testGetInputFieldsNodesByUpdateUserChange() throws Exception{
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword("123");
+        user.setEmail("bebraSlhypa@mail.ru");
+
+        this.mockMvc.perform(get("/user/profile").with(user(user)))
+                .andDo(print())
+                .andExpect(content().string(containsString("change")));
+    }
+
     // нужно ещё протестить отображаемый Login, но это уже, наверное, с помощью UserDetails.
     @Test
     public void testQuantityNodesUpdateProfile() throws Exception {
