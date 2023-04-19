@@ -52,12 +52,12 @@ ____
 ____
 
 Сравниваем отображение 2 записей:
-!["notes"](assets/two_records.png)
+!["two_records"](assets/two_records.png)
 
 ____
 
 При переходе на профиль видим кнопку "подписаться"(на бд-side реализовано связью one-to-many):
-!["notes"](assets/two_records.png)
+!["sub"](assets/sub.png)
 
 
 
