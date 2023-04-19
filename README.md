@@ -15,7 +15,7 @@
  :heavy_check_mark: Настроить веб-сокеты под нажатие лайков \
  :heavy_check_mark: Пагинация \
 
-!(assets/mainpage.png)
+!["main page"](assets/mainpage.png)
 
 
  
