@@ -6,6 +6,7 @@
 /home/egor/Документы/java/java Intellij/hormonesNneurotransmitters/src/main/java/brain/service/HormoneService.java
 /home/egor/Документы/java/java Intellij/hormonesNneurotransmitters/src/main/java/brain/controller/UserController.java
 /home/egor/Документы/java/java Intellij/hormonesNneurotransmitters/src/main/java/brain/controller/LoginController.java
+/home/egor/Документы/java/java Intellij/hormonesNneurotransmitters/src/main/java/brain/config/WebSocketConfig.java
 /home/egor/Документы/java/java Intellij/hormonesNneurotransmitters/src/main/java/brain/config/MailConfig.java
 /home/egor/Документы/java/java Intellij/hormonesNneurotransmitters/src/main/java/brain/controller/HormoneController.java
 /home/egor/Документы/java/java Intellij/hormonesNneurotransmitters/src/main/java/brain/domain/Role.java
@@ -22,4 +23,5 @@
 /home/egor/Документы/java/java Intellij/hormonesNneurotransmitters/src/main/java/brain/repos/UserRepo.java
 /home/egor/Документы/java/java Intellij/hormonesNneurotransmitters/src/main/java/brain/controller/HomeController.java
 /home/egor/Документы/java/java Intellij/hormonesNneurotransmitters/src/main/java/brain/Application.java
+/home/egor/Документы/java/java Intellij/hormonesNneurotransmitters/src/main/java/brain/websocket/SubWebSocket.java
 /home/egor/Документы/java/java Intellij/hormonesNneurotransmitters/src/main/java/brain/domain/dto/CaptchaResponseDto.java

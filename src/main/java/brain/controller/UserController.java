@@ -71,7 +71,7 @@ public class UserController {
             model.addAttribute("messageType", "success");
             model.addAttribute("message", "Changes is accepted!");
         }
-
+            //ИСПРАВИТЬ
         return "redirect:/user/profile";
     }
 
@@ -82,7 +82,6 @@ public class UserController {
 
         userService.subscribe(userChannel, user);
 
-        System.out.println("Ща буит редиректить");
         return "redirect:/user-notes/" + userChannel.getId();
     }
 
@@ -92,8 +91,6 @@ public class UserController {
                               Model model) {
 
         userService.unsubscribe(userChannel, user);
-
-
 
         return "redirect:/user-notes/" + userChannel.getId();
     }

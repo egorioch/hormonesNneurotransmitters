@@ -23,10 +23,6 @@ public class SubWebSocket extends TextWebSocketHandler {
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception  {
         System.out.println("message: " + message.getPayload());
         String[] messageArray = message.getPayload().split(",");
-        /*System.out.println("Вывод полученного сообщения:");
-        for (String s : messageArray) {
-            System.out.println(s);
-        }*/
 
         String btnName = messageArray[0];
         boolean isSubscriber =  Boolean.parseBoolean(messageArray[1]);

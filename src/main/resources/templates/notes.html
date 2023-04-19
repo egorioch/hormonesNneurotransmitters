@@ -86,7 +86,7 @@
         <div th:if="${notesPage.totalPages > 0}" class="container mt-3">
             <nav aria-label="...">
                 <div class="row">
-                    <ul class="pagination col justify-content-center">
+                    <ul class="pagination col justify-content-center" id="pagination_line">
                         <li class="page-item" th:classappend="${notesPage.number == 0} ? 'disabled'">
                             <a class="page-link"
                                th:href="@{/notes(size=${notesPage.size}, page=${notesPage.number})}"

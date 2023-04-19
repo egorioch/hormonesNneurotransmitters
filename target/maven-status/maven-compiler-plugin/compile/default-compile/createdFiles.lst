@@ -3,7 +3,9 @@ brain/domain/Hormone.class
 brain/DumbPasswordEncoder.class
 brain/domain/User.class
 brain/controller/UserController.class
+brain/websocket/SubWebSocket.class
 brain/service/MailSender.class
+brain/config/WebSocketConfig.class
 brain/controller/HormoneController.class
 brain/service/NoteService.class
 brain/domain/dto/NoteDto.class

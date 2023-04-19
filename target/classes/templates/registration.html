@@ -48,59 +48,60 @@
     <div th:if="${userExistsError != null}" class="alert alert-danger" th:text="${userExistsError}"></div>
 
     <div th:if="${#fields.hasErrors('username')}" class="alert alert-danger"
-         th:errors="*{username}">Username error!
+         th:errors="*{username}" id="username_registration_error">Username error!
     </div>
 
     <div class="form-group row p-3">
         <label class="col-sm-2 col-form-label">Username: </label>
         <div class="col-sm-6">
-            <input type="text" th:field="*{username}" class="form-control" placeholder="username" />
+            <input type="text" th:field="*{username}" class="form-control" placeholder="username" id="username"/>
         </div>
     </div>
 
     <!-- PASSWORD -->
     <div th:if="${#fields.hasErrors('password')}" class="alert alert-danger"
-         th:errors="*{password}">Password error!
+         th:errors="*{password}" id="password_registration_error">Password error!
     </div>
     <div class="form-group row p-3">
         <label class="col-sm-2 col-form-label">Password: </label>
         <div class="col-sm-6">
-            <input type="password" th:field="*{password}" class="form-control" placeholder="password" />
+            <input type="password" th:field="*{password}" class="form-control" placeholder="password" id="password"/>
         </div>
     </div>
 
     <!-- PASSWORD CONFIRM-->
-    <div th:if="${notConfirmError != null}" class="alert alert-danger" th:text="${notConfirmError}"></div>
+    <div th:if="${notConfirmError != null}" class="alert alert-danger" th:text="${notConfirmError}"
+         id="password_confirm_registration_error"></div>
 
 
     <div class="form-group row p-3">
         <label class="col-sm-2 col-form-label">Password confirm: </label>
         <div class="col-sm-6">
-            <input type="password" name="passwordConfirm" class="form-control" placeholder="password" />
+            <input type="password" name="passwordConfirm" class="form-control" placeholder="password" id="password_confirm"/>
         </div>
     </div>
 
     <!-- EMAIL -->
     <div th:if="${#fields.hasErrors('email')}" class="alert alert-danger"
-         th:errors="*{email}">Email error!
+         th:errors="*{email}" id="email_registration_error">Email error!
     </div>
     <div class="form-group row p-3">
         <label class="col-sm-2 col-form-label">Email: </label>
         <div class="col-sm-6">
-            <input type="text" th:field="*{email}" class="form-control" placeholder="email" />
+            <input type="text" th:field="*{email}" class="form-control" placeholder="email" id="email"/>
         </div>
     </div>
 
     <!-- CAPTURE -->
     <div class="g-recaptcha" data-sitekey="6LcGCHEiAAAAAAjFmThKCl458uYevL0AFHSiPzpX"></div>
     <div th:if="${captchaError}" class="alert alert-danger"
-         th:text="${captchaError}">captcha
+         th:text="${captchaError}" id="capture_registration_error">captcha
     </div>
 
 
 <input type="hidden" name="_csrf" value="${_csrf.token}" />
 <!--#if !isRegisterForm><a href="/registration">Add new user</a></#if-->
-<button class="btn btn-primary m-3" type="submit">Create<!--#if isRegisterForm>Create<#else>Sign In</#if--></button>
+<button class="btn btn-primary m-3" type="submit" id="create">Create<!--#if isRegisterForm>Create<#else>Sign In</#if--></button>
 </form>
 
 
